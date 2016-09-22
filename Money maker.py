@@ -1,6 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime as dt
+import numpy as np
+import scipy as sp
+from scipy.signal import savgol_filter
 from Neural_Network import *
 
 startdate = "24 09 2011"
@@ -22,20 +25,33 @@ df_apple = df_apple.iloc[::-1]
 
 df_apple = df_apple["Open"]
 
+df_apple = savgol_filter(df_apple, 101, 2)
+
 X = [ df_apple[i:-6+i] for i in range(6)]
 X = np.array(X).T
 print 'Size of df_apple:', X.shape
+
+
 
 Y = [df_apple[6:]]
 Y = np.array(Y).T
 print Y.shape
 
+
+# X = np.array(([3,5,6,8,1,2], [5,1,10,4,3,7], [10,2,3,5,6,8]), dtype=float)
+# Y = np.array(([75], [82], [93]), dtype=float)
+
+# # Normalize
+# X = X/np.amax(X, axis=0)
+# Y = Y/100 #Max test score is 100
+
 NN = Neural_Network()
 T = trainer(NN)
 T.train(X,Y)
 
-# Yhat = NN.forward(X)
+Yhat = NN.forward(X)
 
-# plt.plot(Y)
-# plt.plot(Yhat)
-# plt.show()
+plt.plot(Y, 'o')
+plt.plot(Yhat,'*')
+plt.plot(Yhat - Y,'D')
+plt.show()

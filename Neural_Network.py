@@ -25,7 +25,7 @@ class Neural_Network(object):
         #Define Hyperparameters
         self.inputLayerSize = 6
         self.outputLayerSize = 1
-        self.hiddenLayerSize = 3
+        self.hiddenLayerSize = 1500
         
         #Weights (parameters)
         self.W1 = np.random.randn(self.inputLayerSize,self.hiddenLayerSize)

@@ -23,7 +23,7 @@ y = y/100 #Max test score is 100
 class Neural_Network(object):
     def __init__(self):        
         #Define Hyperparameters
-        self.inputLayerSize = 2
+        self.inputLayerSize = 6
         self.outputLayerSize = 1
         self.hiddenLayerSize = 3
         

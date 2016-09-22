@@ -11,8 +11,8 @@ bedrijven = {"apple": 22144, "netflix": 672501}
 
 url={}
 
-for bedrijf,number in bedrijven.items():
-    url[bedrijf] = "http://www.google.com/finance/historical?cid=%s&startdate=%s&enddate=%s&num=30&ei=8R7kV4PHEpWRUNSzjuAC&output=csv" %(number, startdate,enddate)
+for bedrijf in bedrijven:
+    url[bedrijf] = "http://www.google.com/finance/historical?cid=%s&startdate=%s&enddate=%s&num=30&ei=8R7kV4PHEpWRUNSzjuAC&output=csv" %(bedrijven[bedrijf], startdate,enddate)
 
 df_apple = pd.read_csv(url["apple"], index_col="\xef\xbb\xbfDate")
 

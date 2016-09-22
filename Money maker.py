@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime as dt
+from Neural_Network.py import *
 
 startdate = "24 09 2011"
 enddate = "24 09 2016"
@@ -18,6 +19,3 @@ df_apple = pd.read_csv(url["apple"], index_col="\xef\xbb\xbfDate")
 
 
 df_apple = df_apple.iloc[::-1]
-#df_apple["Volume"].plot()
-#
-#plt.show()

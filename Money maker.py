@@ -45,6 +45,11 @@ print(Y.shape)
 # X = X/np.amax(X, axis=0)
 # Y = Y/100 #Max test score is 100
 
+# Tjebbes gekut:
+# SIN = np.array([(np.sin(t)+1)/2 for t in np.linspace(0,4*np.pi,144)])
+# X = np.array([SIN[i:i+6] for i in range(len(SIN)-6)])
+# Y = np.array([SIN[6:]]).T
+
 X = np.arange(100) * 2 * np.pi / 100  
 Y = (np.sin(X) + 1) / 2; 
 X.shape = (100,1)

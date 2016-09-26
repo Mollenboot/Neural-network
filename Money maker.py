@@ -6,7 +6,7 @@ import scipy as sp
 from scipy.signal import savgol_filter
 from Neural_Network import *
 
-startdate = "24 09 2011"
+startdate = "24 09 2014"
 enddate = "24 09 2016"
 startdate = dt.datetime.strptime(startdate, '%d %m %Y').strftime('%b+%d%%2C+%Y')
 enddate = dt.datetime.strptime(enddate, '%d %m %Y').strftime('%b+%d%%2C+%Y')

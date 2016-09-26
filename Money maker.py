@@ -18,8 +18,8 @@ url={}
 for bedrijf in bedrijven:
     url[bedrijf] = "http://www.google.com/finance/historical?cid={0}&startdate={1}&enddate={2}&num=30&ei=8R7kV4PHEpWRUNSzjuAC&output=csv".format(bedrijven[bedrijf], startdate,enddate)
 
-df_apple = pd.read_csv(url["apple"], index_col="\xef\xbb\xbfDate")
-
+df_apple = pd.read_csv(url["apple"], index_col="\ufeffDate")
+df_apple.plot()
 
 df_apple = df_apple.iloc[::-1]
 
@@ -29,13 +29,13 @@ df_apple = savgol_filter(df_apple, 101, 2)
 
 X = [ df_apple[i:-6+i] for i in range(6)]
 X = np.array(X).T
-print 'Size of df_apple:', X.shape
+print('Size of df_apple:', X.shape)
 
 
 
 Y = [df_apple[6:]]
 Y = np.array(Y).T
-print Y.shape
+print(Y.shape)
 
 
 # X = np.array(([3,5,6,8,1,2], [5,1,10,4,3,7], [10,2,3,5,6,8]), dtype=float)

@@ -23,9 +23,9 @@ y = y/100 #Max test score is 100
 class Neural_Network(object):
     def __init__(self):        
         #Define Hyperparameters
-        self.inputLayerSize = 6
+        self.inputLayerSize = 1
         self.outputLayerSize = 1
-        self.hiddenLayerSize = 1500
+        self.hiddenLayerSize = 250
         
         #Weights (parameters)
         self.W1 = np.random.randn(self.inputLayerSize,self.hiddenLayerSize)
@@ -138,7 +138,7 @@ class trainer(object):
         
         params0 = self.N.getParams()
 
-        options = {'maxiter': 200, 'disp' : True}
+        options = {'maxiter': 10000, 'disp' : True}
         _res = optimize.minimize(self.costFunctionWrapper, params0, jac=True, method='BFGS', \
                                  args=(X, y), options=options, callback=self.callbackF)
 

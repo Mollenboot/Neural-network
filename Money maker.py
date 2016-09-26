@@ -45,13 +45,20 @@ print(Y.shape)
 # X = X/np.amax(X, axis=0)
 # Y = Y/100 #Max test score is 100
 
+X = np.arange(100) * 2 * np.pi / 100  
+Y = (np.sin(X) + 1) / 2; 
+X.shape = (100,1)
+Y.shape = (100,1)
+
+
 NN = Neural_Network()
 T = trainer(NN)
 T.train(X,Y)
 
 Yhat = NN.forward(X)
 
-plt.plot(Y, 'o')
-plt.plot(Yhat,'*')
-plt.plot(Yhat - Y,'D')
+plt.plot(Y,         'o', label='Real')
+plt.plot(Yhat,      '*', label='Estimate')
+plt.plot(Yhat - Y,  'D', label='Error')
+plt.legend()
 plt.show()

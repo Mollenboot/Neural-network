@@ -6,44 +6,48 @@ import scipy as sp
 from scipy.signal import savgol_filter
 from Neural_Network import *
 
-startdate = "24 09 2014"
-enddate = "24 09 2016"
-startdate = dt.datetime.strptime(startdate, '%d %m %Y').strftime('%b+%d%%2C+%Y')
-enddate = dt.datetime.strptime(enddate, '%d %m %Y').strftime('%b+%d%%2C+%Y')
+# startdate = "24 09 2014"
+# enddate = "24 09 2016"
+# startdate = dt.datetime.strptime(startdate, '%d %m %Y').strftime('%b+%d%%2C+%Y')
+# enddate = dt.datetime.strptime(enddate, '%d %m %Y').strftime('%b+%d%%2C+%Y')
 
-bedrijven = {"apple": 22144, "netflix": 672501}
+# bedrijven = {"apple": 22144, "netflix": 672501}
 
-url={}
+# url={}
 
-for bedrijf in bedrijven:
-    url[bedrijf] = "http://www.google.com/finance/historical?cid={0}&startdate={1}&enddate={2}&num=30&ei=8R7kV4PHEpWRUNSzjuAC&output=csv".format(bedrijven[bedrijf], startdate,enddate)
+# for bedrijf in bedrijven:
+#     url[bedrijf] = "http://www.google.com/finance/historical?cid={0}&startdate={1}&enddate={2}&num=30&ei=8R7kV4PHEpWRUNSzjuAC&output=csv".format(bedrijven[bedrijf], startdate,enddate)
 
-df_apple = pd.read_csv(url["apple"], index_col="\ufeffDate")
-
-
-df_apple = df_apple.iloc[::-1]
-
-df_apple = df_apple["Open"]
-
-df_apple = savgol_filter(df_apple, 101, 2)
-
-X = [ df_apple[i:-6+i] for i in range(6)]
-X = np.array(X).T
-print('Size of df_apple:', X.shape)
+# df_apple = pd.read_csv(url["apple"], index_col="\ufeffDate")
 
 
+# df_apple = df_apple.iloc[::-1]
 
-Y = [df_apple[6:]]
-Y = np.array(Y).T
-print(Y.shape)
+# df_apple = df_apple["Open"]
+
+# df_apple = savgol_filter(df_apple, 101, 2)
+
+# X = [ df_apple[i:-6+i] for i in range(6)]
+# X = np.array(X).T
+# print('Size of df_apple:', X.shape)
+
+SIN = np.array([(np.sin(t)+1)/2 for t in np.linspace(0,4*np.pi,144)])
+# print(len(SIN))
+X = np.array([SIN[i:i+6] for i in range(len(SIN)-6)])
+# print(X)
+Y = np.array([SIN[6:]]).T
+# print(Y)
+# Y = [df_apple[6:]]
+# Y = np.array(Y).T
+# print(Y.shape)
 
 
 # X = np.array(([3,5,6,8,1,2], [5,1,10,4,3,7], [10,2,3,5,6,8]), dtype=float)
 # Y = np.array(([75], [82], [93]), dtype=float)
 
-# # Normalize
-# X = X/np.amax(X, axis=0)
-# Y = Y/100 #Max test score is 100
+# Normalize
+X = X/np.amax(X, axis=0)
+Y = Y/100 #Max test score is 100
 
 NN = Neural_Network()
 T = trainer(NN)
